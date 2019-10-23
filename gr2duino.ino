@@ -85,7 +85,7 @@ float getSpeed(){
     lcd.print(currentTime / 1000);
   }
   
-  float countRpm = (float(count) / float(sampleTime)) * 1000.; // расчет оборотов в секунду
+  float countRpm = (float(count) * 20 / float(sampleTime)) * 1000.; // расчет оборотов в секунду
   float flowSpeed = 0.004 + 0.219 * countRpm; // расчет скорости течения по уравнению конкретной вертушки
   Serial.print(F("RPM count: "));
   Serial.println(countRpm);

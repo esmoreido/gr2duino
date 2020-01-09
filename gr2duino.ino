@@ -63,12 +63,12 @@ float getSpeed(){
   unsigned long currentTime = 0;
   unsigned long startTime = millis();
   while (currentTime <= sampleTime){ // цикл по времени измерения
-    if (sensorCurrent.readCurrentDC() > 1.)
+    if (sensorCurrent.readCurrentDC() > 0.5)
     {
       countFlag = HIGH;
       Serial.println(sensorCurrent.readCurrentDC());
     }
-    if (sensorCurrent.readCurrentDC() <= 1. && countFlag == HIGH)
+    if (sensorCurrent.readCurrentDC() <= 0.5 && countFlag == HIGH)
     {
       count++;
       countFlag=LOW;
@@ -83,6 +83,8 @@ float getSpeed(){
     // печатаем вторую строку
     lcd.setCursor(0, 1);
     lcd.print(currentTime / 1000);
+    lcd.setCursor(10, 1);
+    lcd.print(count);
   }
   
   float countRpm = (float(count) * 20 / float(sampleTime)) * 1000.; // расчет оборотов в секунду
